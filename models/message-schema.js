@@ -9,7 +9,7 @@ name: yup
     .max(15, 'Your name cannot be more than ${max} characters.')
     .matches(/^[A-Za-z]+$/, 'Invalid name. Use Upper and Lowercaseletters only.')
     .required('Your name is required.'),
-msgText: yup
+messageTxt: yup
     .string()
     .trim()
     .min(2, 'Your message must be at least ${min} characters.')

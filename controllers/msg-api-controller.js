@@ -21,10 +21,11 @@ const addNewMessage = async (req, res) => {
         let message = await messageSchema.validate(req.body);
         message.id = messages.length;
         messages.unshift(message);
-        res.status(201).send("Created");
+        res.status(201).send(message);
         console.log(messages);
 
     } catch (err){
+        console.log(req.body);
         res.status(400).send("Bad Request. The message in the body of the \
         Request is either missing or malformed.");
     }
