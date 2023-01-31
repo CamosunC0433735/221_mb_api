@@ -1,4 +1,4 @@
-
+import messageSchema from '../models/message-schema.js';
 
 let messages = [
     { id: 0, name: "David", messageTxt: "Hello world" },
@@ -17,7 +17,17 @@ const getAllMessages = (req, res) => {
 };
 // POST Request Handler
 const addNewMessage = async (req, res) => {
-    res.status(200).send('Successful API POST Request');
+    try {
+        let message = await messageSchema.validate(req.body);
+        message.id = messages.length;
+        messages.unshift(message);
+        res.status(201).send("Created");
+        console.log(messages);
+
+    } catch (err){
+        res.status(400).send("Bad Request. The message in the body of the \
+        Request is either missing or malformed.");
+    }
 };
 
 export { getAllMessages, addNewMessage };
