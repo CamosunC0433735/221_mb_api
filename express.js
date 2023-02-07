@@ -1,3 +1,6 @@
+// mongodb connection via mongoose
+import './db.js';
+
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
@@ -5,8 +8,6 @@ import morgan from 'morgan';
 import cors from 'cors';
 import apiRouter from './routes/api-router.js';
 
-// mongodb connection via mongoose
-import './db.js';
 
 const app = express();
 
