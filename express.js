@@ -5,6 +5,9 @@ import morgan from 'morgan';
 import cors from 'cors';
 import apiRouter from './routes/api-router.js';
 
+// mongodb connection via mongoose
+import './db.js';
+
 const app = express();
 
 // Express middleware
