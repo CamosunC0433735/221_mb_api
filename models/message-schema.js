@@ -28,7 +28,7 @@ const messageSchema = new mongoose.Schema({
         maxLength: 15,
         match: /^[A-Za-z]+$/
     },
-    msgText: {
+    messageTxt: {
         type: String,
         required: true,
         trim: true,

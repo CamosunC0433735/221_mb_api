@@ -25,11 +25,12 @@ const getAllMessages = async (req, res) => {
 // POST Request Handler
 const addNewMessage = async (req, res) => {
     try {
-        let message = await messageSchema.validate(req.body);
-        message.id = messages.length;
-        messages.unshift(message);
+        //let message = await messageSchema.validate(req.body);
+        // message.id = messages.length;
+        // messages.unshift(message);
+        let message = await messageModel.create(req.body);
         res.status(201).send(message);
-        console.log(messages);
+        // console.log(messages);
 
     } catch (err){
         console.log(req.body);
