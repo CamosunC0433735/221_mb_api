@@ -9,7 +9,7 @@ import yup from 'yup';
 //     .max(15, 'Your name cannot be more than ${max} characters.')
 //     .matches(/^[A-Za-z]+$/, 'Invalid name. Use Upper and Lowercaseletters only.')
 //     .required('Your name is required.'),
-// messageTxt: yup
+// msgText: yup
 //     .string()
 //     .trim()
 //     .min(2, 'Your message must be at least ${min} characters.')
@@ -28,7 +28,7 @@ const messageSchema = new mongoose.Schema({
         maxLength: 15,
         match: /^[A-Za-z]+$/
     },
-    messageTxt: {
+    msgText: {
         type: String,
         required: true,
         trim: true,

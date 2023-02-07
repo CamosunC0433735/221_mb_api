@@ -4,9 +4,9 @@ import mongoose from 'mongoose';
 const messageModel = mongoose.model('message');
 
 // let messages = [
-//     { id: 0, name: "David", messageTxt: "Hello world" },
-//     { id: 1, name: "Paul", messageTxt: "Hi David" },
-//     { id: 2, name: "George", messageTxt: "I love writing messages to my imaginary friends" }
+//     { id: 0, name: "David", msgText: "Hello world" },
+//     { id: 1, name: "Paul", msgText: "Hi David" },
+//     { id: 2, name: "George", msgText: "I love writing messages to my imaginary friends" }
 // ]
 
 // GET Request Handler
