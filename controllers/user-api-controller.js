@@ -20,8 +20,11 @@ const registerNewUser = async (req, res) => {
         res.status(400).send("Bad Request. The message in the body of the \
         Request is either missing or malformed.");
     }
-
 }
+
+const logInUser = (req, res) => {
+    res.status(200).send("Successful API Login Request");
+};
 
 // helper function to determine if email or username
 // already exists in the DB. Returns true or false.
@@ -59,4 +62,4 @@ passport.use(new BasicStrategy(
 ));
 
 
-export { registerNewUser };
+export { registerNewUser, logInUser };
