@@ -1,6 +1,8 @@
+import jwt from 'jsonwebtoken';
+
 import mongoose from 'mongoose';
 import passport from 'passport';
-import LocalStrategy  from 'passport-local';
+import LocalStrategy from 'passport-local';
 
 const userModel = mongoose.model('user')
 
@@ -23,7 +25,22 @@ const registerNewUser = async (req, res) => {
 }
 
 const logInUser = (req, res) => {
-    res.status(200).send("Successful API Login Request");
+    // generates a JWT Token
+    jwt.sign(
+        {
+            sub: req.user._id,
+            username: req.user.username
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: '20m' },
+        (error, token) => {
+            if (error) {
+                res.status(400).send('Bad Request. Couldn\'t generate token.');
+            } else {
+                res.status(200).json({ token });
+            }
+        }
+    );
 };
 
 // helper function to determine if email or username
