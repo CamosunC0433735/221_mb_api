@@ -4,6 +4,12 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+let jwtOptions = {};
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+jwtOptions.secretOrKey = process.env.JWT_SECRET;
+
+
 const userModel = mongoose.model('user')
 
 const registerNewUser = async (req, res) => {
@@ -53,6 +59,25 @@ const alreadyExists = async (email, username) => (
         ]
     })
 );
+
+// Configure JWT Token Auth
+passport.use(new JwtStrategy(
+    jwtOptions, (jwt_payload, done) => {
+        userModel
+            .findById(jwt_payload.sub)
+            .exec((error, user) => {
+                // error in searching
+                if (error) return done(error);
+                if (!user) {
+                    // user not found
+                    return done(null, false);
+                } else {
+                    // user found
+                    return done(null, user);
+                }
+            })
+    }
+));
 
 
 passport.use(new LocalStrategy(
