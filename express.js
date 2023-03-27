@@ -1,3 +1,6 @@
+// for reading environment vars
+import 'dotenv/config.js'
+
 // mongodb connection via mongoose
 import './db.js';
 
