@@ -11,6 +11,7 @@ jwtOptions.secretOrKey = process.env.JWT_SECRET;
 
 
 const userModel = mongoose.model('user')
+const usernameUpdateModel = mongoose.model('usernameUpdate')
 
 const registerNewUser = async (req, res) => {
     //res.status(200).send('Successful API New User POST Request');
@@ -48,6 +49,33 @@ const logInUser = (req, res) => {
         }
     );
 };
+
+const changeUsername = async (req, res) => {
+    try {
+      let username = await usernameUpdateModel.findById(req.params.userId).exec();
+      if (!username) {
+        // there wasn't an error, but the username wasn't found
+        // i.e. the id given doesn't match any in the database
+        res.sendStatus(404);
+      } else {
+        //console.log(username);
+        // username found - is the user authorized?
+        if (username.username === req.user.username) {
+          // auth user is owner of username, change it!
+            username.username = req.body.username;
+            await username.save();
+          // send back 204 No Content
+            res.sendStatus(204);
+        } else {
+          // auth user is not owner, unauthorized
+          res.sendStatus(401);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(400);
+    }
+  };
 
 // helper function to determine if email or username
 // already exists in the DB. Returns true or false.
@@ -103,4 +131,4 @@ passport.use(new LocalStrategy(
     }
 ))
 
-export { registerNewUser, logInUser };
+export { registerNewUser, logInUser, changeUsername };
