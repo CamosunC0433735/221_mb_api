@@ -21,6 +21,6 @@ mongoose.connection.on('disconnected', () => {
 
 import './models/message-schema.js';
 import './models/user-schema.js';
-import './models/username-update-schema.js';
-import './models/email-update-schema.js';
-import './models/course-schema.js';
+// import './models/username-update-schema.js';
+// import './models/email-update-schema.js';
+// import './models/course-schema.js';
