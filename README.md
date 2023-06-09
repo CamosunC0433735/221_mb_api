@@ -1,4 +1,5 @@
 # 221_mb_api
+The backend for a chat/message board SPA.
 
 # First Time Setup: 
 - Generate a secret key with the following the command:
